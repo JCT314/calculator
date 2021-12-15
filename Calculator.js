@@ -63,6 +63,9 @@ calculator.addEventListener('click', (e) => {
     let numberBtn = e.target.closest('.btn--number');
     let operatorBtn = e.target.closest('.btn[data-operator]');
     let equalBtn = e.target.closest('.btn--equal');
+    let clearBtn = e.target.closest('.btn--clear');
+    let deleteBtn = e.target.closest('.btn--delete');
+    
 
     if(numberBtn && usingLastResult && !operator) {
         usingLastResult = false;
@@ -89,5 +92,11 @@ calculator.addEventListener('click', (e) => {
 
     if(equalBtn && operator) {
         renderResult();
+    }
+
+    if(clearBtn) {
+        num1 = num2 = operator = null;
+        storedVal = "";
+        display.textContent = storedVal;
     }
 });
