@@ -32,7 +32,9 @@ body {
 .screen {
   background-color: #eee;
   padding: 10px;
-  text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: center;
   font-size: 2.8rem;
   margin: 0 auto;
   margin-bottom: 20px;
@@ -66,7 +68,12 @@ body {
 }
 
 .btn[data-operator] {
-  background-color: #033509d5;
+  background-color: #0a5513;
+  color: #fff;
+}
+
+.btn[data-operator]:active {
+  background-color: #033509;
   color: #fff;
 }
 

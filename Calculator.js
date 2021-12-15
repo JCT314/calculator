@@ -1,3 +1,9 @@
+const display = document.querySelector('.screen');
+const calculator = document.querySelector('.calculator');
+let storedVal = "";
+let num1 = null,num2 = null, operator = null;
+let usingLastResult = false;
+
 function add(num1,num2) {
     return num1 + num2;
 }
@@ -57,11 +63,60 @@ function renderResult() {
     }
 }
 
-const display = document.querySelector('.screen');
-let storedVal = "";
-let num1 = null,num2 = null, operator = null;
-let usingLastResult = false;
-const calculator = document.querySelector('.calculator');
+window.addEventListener('keydown', (e) => {
+    e.preventDefault();
+    const keyCode = e.keyCode;
+    const numberCodes = [48,49,50,51,52,53,54,55,56,57];
+    const operatorCodes = [173,191];
+    const operatorShiftCodes = [61,56];
+    const deleteCode = 8;
+    const periodCode = 190;
+    const equalCodes = [61,13];
+
+
+    if(((numberCodes.includes(keyCode) && !e.shiftKey) || keyCode === periodCode) && usingLastResult && !operator) {
+        usingLastResult = false;
+        storedVal = "";
+        num1 = null;
+    }
+
+    if((numberCodes.includes(keyCode) && !e.shiftKey) || (keyCode === periodCode) && storedVal.length < 9) {
+        if(numberCodes.includes(keyCode)) {1
+            storedVal += e.key;
+        }
+        if(keyCode === periodCode) {
+            if(!storedVal.includes('.')) {
+                storedVal += ".";
+            }
+        }
+        display.textContent = storedVal;
+    }
+    
+    if(operatorCodes.includes(keyCode) && !e.shiftKey || (e.shiftKey && operatorShiftCodes.includes(keyCode))) {
+        if(storedVal !== "") {
+            if(!num1) {
+                num1 = Number(storedVal);
+            } else if(operator){
+                renderResult();
+            }
+        }
+        storedVal = "";
+        operator = e.key;
+        console.log(operator);
+    }
+
+    if(equalCodes.includes(keyCode) && !e.shiftKey && operator) {
+        renderResult();
+    }
+
+    if(keyCode === deleteCode) {
+        let temp = display.textContent;
+        temp = temp.substring(0,temp.length - 1);
+        display.textContent = temp;
+        storedVal = display.textContent;
+    }
+});
+
 calculator.addEventListener('click', (e) => {
     let numberBtn = e.target.closest('.btn--number');
     let operatorBtn = e.target.closest('.btn[data-operator]');
@@ -71,7 +126,7 @@ calculator.addEventListener('click', (e) => {
     let decimalBtn = e.target.closest('.btn--decimal');
     
 
-    if(numberBtn && usingLastResult && !operator) {
+    if((numberBtn || decimalBtn) && usingLastResult && !operator) {
         usingLastResult = false;
         storedVal = "";
         num1 = null;
