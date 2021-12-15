@@ -99,4 +99,11 @@ calculator.addEventListener('click', (e) => {
         storedVal = "";
         display.textContent = storedVal;
     }
+
+    if(deleteBtn) {
+        let temp = display.textContent;
+        temp = temp.substring(0,temp.length - 1);
+        display.textContent = temp;
+        storedVal = display.textContent;
+    }
 });
