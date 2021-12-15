@@ -2,6 +2,12 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -31,7 +37,7 @@ body {
   margin: 0 auto;
   margin-bottom: 20px;
   width: 350px;
-  height: 80px;
+  height: 100px;
 }
 
 .btns {
@@ -59,8 +65,34 @@ body {
   background-color: #ddd;
 }
 
+.btn[data-operator] {
+  background-color: #033509d5;
+  color: #fff;
+}
+
 .wide-btn {
   grid-column: span 2;
+}
+
+.btn--delete {
+}
+
+.btn--clear {
+  background-color: #911010;
+  color: #fff;
+}
+
+.btn--clear:active {
+  background-color: #701111;
+}
+
+.btn--delete {
+  background-color: #eec71c;
+  color: #000;
+}
+
+.btn--delete:active {
+  background-color: #ddb60b;
 }
 
 .icon {

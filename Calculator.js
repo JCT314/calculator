@@ -34,6 +34,9 @@ function operate(num1,num2,operator) {
             }
             break;
     }
+    if(Number(result) && result % 1 !== 0) {
+        result = parseFloat(result.toFixed(8));
+    }
     return result;
 }
 
@@ -65,6 +68,7 @@ calculator.addEventListener('click', (e) => {
     let equalBtn = e.target.closest('.btn--equal');
     let clearBtn = e.target.closest('.btn--clear');
     let deleteBtn = e.target.closest('.btn--delete');
+    let decimalBtn = e.target.closest('.btn--decimal');
     
 
     if(numberBtn && usingLastResult && !operator) {
@@ -73,8 +77,15 @@ calculator.addEventListener('click', (e) => {
         num1 = null;
     }
 
-    if(numberBtn && storedVal.length < 9) {
-        storedVal += numberBtn.textContent;
+    if((numberBtn || decimalBtn) && storedVal.length < 9) {
+        if(numberBtn) {
+            storedVal += numberBtn.textContent;
+        }
+        if(decimalBtn) {
+            if(!storedVal.includes('.')) {
+                storedVal += ".";
+            }
+        }
         display.textContent = storedVal;
     }
     
