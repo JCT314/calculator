@@ -66,25 +66,25 @@ function renderResult() {
 window.addEventListener('keydown', (e) => {
     e.preventDefault();
     const keyCode = e.keyCode;
-    const numberCodes = [48,49,50,51,52,53,54,55,56,57];
-    const operatorCodes = [173,191];
+    const numberCodes = [48,49,50,51,52,53,54,55,56,57,96,97,98,99,100,101,102,103,104,105];
+    const operatorCodes = [173,191,106,107,109,111];
     const operatorShiftCodes = [61,56];
     const deleteCode = 8;
-    const periodCode = 190;
+    const periodCodes = [190,110];
     const equalCodes = [61,13];
 
 
-    if(((numberCodes.includes(keyCode) && !e.shiftKey) || keyCode === periodCode) && usingLastResult && !operator) {
+    if(((numberCodes.includes(keyCode) && !e.shiftKey) || periodCodes.includes(keyCode)) && usingLastResult && !operator) {
         usingLastResult = false;
         storedVal = "";
         num1 = null;
     }
 
-    if((numberCodes.includes(keyCode) && !e.shiftKey) || (keyCode === periodCode) && storedVal.length < 9) {
+    if((numberCodes.includes(keyCode) && !e.shiftKey) || (periodCodes.includes(keyCode)) && storedVal.length < 9) {
         if(numberCodes.includes(keyCode)) {1
             storedVal += e.key;
         }
-        if(keyCode === periodCode) {
+        if(periodCodes.includes(keyCode)) {
             if(!storedVal.includes('.')) {
                 storedVal += ".";
             }
