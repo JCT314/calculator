@@ -80,7 +80,7 @@ window.addEventListener('keydown', (e) => {
         num1 = null;
     }
 
-    if((numberCodes.includes(keyCode) && !e.shiftKey) || (periodCodes.includes(keyCode)) && storedVal.length < 9) {
+    if((numberCodes.includes(keyCode) && !e.shiftKey || periodCodes.includes(keyCode)) && storedVal.length < 9) {
         if(numberCodes.includes(keyCode)) {1
             storedVal += e.key;
         }
